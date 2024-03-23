@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: b8f8f1a310f5441f9598e2c40ac77058
 labels:
 - gvh
 - gvh_version-11.8.0
+=======
+guid: b86aa3582c084272a2ff16841e0523f7
+labels:
+- gvh
+- gvh_version-1.2.176
+>>>>>>> parent of 6dafeb1 (Merge pull request #2 from afraism/services)
 - gvhp_exportpath-ExternalDependencyManager/Editor/README.md
 TextScriptImporter:
   externalObjects: {}

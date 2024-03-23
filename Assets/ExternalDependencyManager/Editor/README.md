@@ -47,7 +47,131 @@ to test out the package during development.
 Updated releases are available on
 [GitHub](https://github.com/googlesamples/unity-jar-resolver)
 
+<<<<<<< HEAD
 ## Requirements
+=======
+# Background
+
+Many Unity plugins have dependencies upon Android specific libraries, iOS
+CocoaPods, and sometimes have transitive dependencies upon other Unity plugins.
+This causes the following problems:
+
+   * Integrating platform specific (e.g Android and iOS) libraries within a
+     Unity project can be complex and a burden on a Unity plugin maintainer.
+   * The process of resolving conflicting dependencies on platform specific
+     libraries is pushed to the developer attempting to use a Unity plugin.
+     The developer trying to use your plugin is very likely to give up when
+     faced with Android or iOS specific build errors.
+   * The process of resolving conflicting Unity plugins (due to shared Unity
+     plugin components) is pushed to the developer attempting to use your Unity
+     plugin. In an effort to resolve conflicts, the developer will very likely
+     attempt to resolve problems by deleting random files in your plugin,
+     report bugs when that doesn't work and finally give up.
+
+EDM provides solutions for each of these problems.
+
+## Android Dependency Management
+
+The *Android Resolver* component of this plugin will download and integrate
+Android library dependencies and handle any conflicts between plugins that share
+the same dependencies.
+
+Without the Android Resolver, typically Unity plugins bundle their AAR and
+JAR dependencies, e.g. a Unity plugin `SomePlugin` that requires the Google
+Play Games Android library would redistribute the library and its transitive
+dependencies in the folder `SomePlugin/Android/`.  When a user imports
+`SomeOtherPlugin` that includes the same libraries (potentially at different
+versions) in `SomeOtherPlugin/Android/`, the developer using `SomePlugin` and
+`SomeOtherPlugin` will see an error when building for Android that can be hard
+to interpret.
+
+Using the Android Resolver to manage Android library dependencies:
+
+   * Solves Android library conflicts between plugins.
+   * Handles all of the various processing steps required to use Android
+     libraries (AARs, JARs) in Unity 4.x and above projects.  Almost all
+     versions of Unity have - at best - partial support for AARs.
+   * (Experimental) Supports minification of included Java components without
+     exporting a project.
+
+## iOS Dependency Management
+
+The *iOS Resolver* component of this plugin integrates with
+[CocoaPods](https://cocoapods.org/) to download and integrate iOS libraries
+and frameworks into the Xcode project Unity generates when building for iOS.
+Using CocoaPods allows multiple plugins to utilize shared components without
+forcing developers to fix either duplicate or incompatible versions of
+libraries included through multiple Unity plugins in their project.
+
+## Package Manager Registry Setup
+
+The [Package Manager](https://docs.unity3d.com/Manual/Packages.html)
+(PM) makes use of [NPM](https://www.npmjs.com/) registry servers for package
+hosting and provides ways to discover, install, upgrade and uninstall packages.
+This makes it easier for developers to manage plugins within their projects.
+
+However, installing additional package registries requires a few manual steps
+that can potentially be error prone.  The *Package Manager Resolver*
+component of this plugin integrates with
+[PM](https://docs.unity3d.com/Manual/Packages.html) to provide a way to
+auto-install PM package registries when a `.unitypackage` is installed which
+allows plugin maintainers to ship a `.unitypackage` that can provide access
+to their own PM registry server to make it easier for developers to
+manage their plugins.
+
+## Unity Plugin Version Management
+
+Finally, the *Version Handler* component of this plugin simplifies the process
+of managing transitive dependencies of Unity plugins and each plugin's upgrade
+process.
+
+For example, without the Version Handler plugin, if:
+
+   * Unity plugin `SomePlugin` includes `EDM4U` plugin at
+     version 1.1.
+   * Unity plugin `SomeOtherPlugin` includes `EDM4U`
+     plugin  at version 1.2.
+
+The version of `EDM4U` included in the developer's project depends upon the
+order the developer imports `SomePlugin` or `SomeOtherPlugin`.
+
+This results in:
+
+   * `EDM4U` at version 1.2, if `SomePlugin` is imported then `SomeOtherPlugin`
+     is imported.
+   * `EDM4U` at version 1.1, if `SomeOtherPlugin` is imported then
+     `SomePlugin` is imported.
+
+The Version Handler solves the problem of managing transitive dependencies by:
+
+   * Specifying a set of packaging requirements that enable a plugin at
+     different versions to be imported into a Unity project.
+   * Providing activation logic that selects the latest version of a plugin
+     within a project.
+
+When using the Version Handler to manage `EDM4U` included in `SomePlugin` and
+`SomeOtherPlugin`, from the prior example, version 1.2 will always be the
+version activated in a developer's Unity project.
+
+Plugin creators are encouraged to adopt this library to ease integration for
+their customers.  For more information about integrating EDM4U
+into your own plugin, see the [Plugin Redistribution](#plugin-redistribution)
+section of this document.
+
+# Analytics
+
+The External Dependency Manager for Unity plugin by default logs usage to Google
+Analytics. The purpose of the logging is to quantitatively measure the usage of
+functionality, to gather reports on integration failures and to inform future
+improvements to the developer experience of the External Dependency Manager
+plugin. Note that the analytics collected are limited to the scope of the EDM4U
+plugin’s usage.
+
+For details of what is logged, please refer to the usage of
+`EditorMeasurement.Report()` in the source code.
+
+# Requirements
+>>>>>>> parent of 6dafeb1 (Merge pull request #2 from afraism/services)
 
 The *Android Resolver* and *iOS Resolver* components of the plugin only work
 with Unity version 4.6.8 or higher.

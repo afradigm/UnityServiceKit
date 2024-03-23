@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Version 1.2.179 - Feb 12, 2024
 * Android Resolver - Added logic to automatically turn on `mainTemplate.gradle`
   for new projects, and prompt users to enable it on projects that have previously
@@ -10,6 +11,8 @@
 * iOS Resolver - Added `/opt/homebrew/bin` to Cocoapod executable search path.
   Fixes #627
 
+=======
+>>>>>>> parent of 6dafeb1 (Merge pull request #2 from afraism/services)
 # Version 1.2.176 - Apr 27, 2023
 * Android Resolver - Added two Android Resolver settings to determine whether
   EDM4U injects custom local Maven repo path as a relative path or full path.

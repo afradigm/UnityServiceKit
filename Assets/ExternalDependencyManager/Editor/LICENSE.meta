@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 9be3e4155c3148d298ad390b9db89273
 labels:
 - gvh
 - gvh_version-11.8.0
+=======
+guid: d980a3fa4da0408e910fde746ce3b558
+labels:
+- gvh
+- gvh_version-1.2.176
+>>>>>>> parent of 6dafeb1 (Merge pull request #2 from afraism/services)
 - gvhp_exportpath-ExternalDependencyManager/Editor/LICENSE
 DefaultImporter:
   externalObjects: {}
