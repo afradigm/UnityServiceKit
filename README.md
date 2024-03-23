@@ -12,9 +12,10 @@ The Unity Service Kit is a comprehensive collection of SDKs critical for various
 
 The Unity Service Kit includes SDKs for the following services:
 
-- Firebase
-- Analytics
-- [Add more SDKs here]
+- Game Analytics SDK
+- AppLovin mediation SDK
+- Kochava SDK
+- Firebase SDK Integration (FirebaseAnalytics, FirebaseCrashlytics, FirebaseMessaging, FirebaseRemoteConfig)
 
 ## Getting Started
 
